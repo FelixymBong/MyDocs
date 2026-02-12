@@ -46,6 +46,24 @@ ssh-keygen -t rsa -C "3230100841@zju.edu.cn"
 ssh -T git@github.com
 ```
 
+本地仓库关联远程库：
+
+```
+git remote add origin git@github.com:FelixymBong/MyDocs.git
+```
+
+push报错密钥什么的问题：可能是SSH 代理（ssh-agent）没有正确加载私钥，或者私钥的权限设置不对，解决方法：
+
+1.启动代理：
+```
+eval "$(ssh-agent -s)"
+```
+
+2.添加私钥：
+```
+ssh-add ~/.ssh/id_rsa
+```
+
 查看隐藏文件/文件夹：
 
 ```
@@ -85,5 +103,5 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emula
 sudo update-alternatives --config x-terminal-emulator
 ```
 
-1.  
+11. 
 
