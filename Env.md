@@ -103,5 +103,41 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emula
 sudo update-alternatives --config x-terminal-emulator
 ```
 
-11. 
+11. VSCode配置
+
+下载以下的Extensions:
+
+
+
+12. Miniconda配置
+
+```
+sudo apt update
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+source ~/.bashrc
+```
+配置清华源：
+```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --set show_channel_urls yes
+```
+取消默认自动激活 base 环境:
+```
+conda config --set auto_activate_base false
+```
+conda常用命令：
+```
+conda create -n ENV_NAME python=3.9
+conda activate ENV_NAME
+conda install PACKAGE_NAME  
+conda remove PACKAGE_NAME
+conda list
+conda deactivate
+conda env remove -n ENV_NAME
+conda env list
+```
 
