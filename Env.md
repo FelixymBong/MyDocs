@@ -140,4 +140,60 @@ conda deactivate
 conda env remove -n ENV_NAME
 conda env list
 ```
+13. Docker配置
+
+根据
+https://docs.docker.com/engine/install/ubuntu/
+
+```
+sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
+```
+```
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+```
+```
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+尝试pull镜像，报错:
+```
+Error response from daemon: failed to resolve reference "docker.io/library/busybox:latest": failed to do request: Head "https://registry-1.docker.io/v2/library/busybox/manifests/latest": dial tcp 104.244.46.244:443: i/o timeout
+```
+原因:docker服务器被墙了；解决方案：配置docker代理：
+```
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf
+```
+写入以下内容（端口号看你的代理软件）：
+```
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:7890"
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.somecorporation.com"
+```
+重载配置并重启 Docker：
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+检查配置是否生效：
+```
+sudo docker info | grep Proxy
+```
+再次pull后成功。
 
