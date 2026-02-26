@@ -1,18 +1,18 @@
 # 环境初始化步骤
 
-1. 时间调整
+## 1. 时间调整
 
 ```
 sudo timedatectl set-local-rtc 1 --adjust-system-clock
 ```
 
-2. 查看显卡相关设置
+## 2. 查看显卡相关设置
 
 ```
 nvidia-smi
 ```
 
-3. 修改 apt 源（备份并更新）
+## 3. 修改 apt 源（备份并更新）
 
 ```
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -20,14 +20,14 @@ sudo nano /etc/apt/sources.list
 sudo apt update
 ```
 
-4. 安装常用工具
+## 4. 安装常用工具
 
 ```
 sudo apt install terminator
 sudo apt install ssh
 ```
 
-5. Git 与 SSH 配置
+## 5. Git 与 SSH 配置
 
 ```
 sudo apt-get install git
@@ -64,38 +64,38 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```
 
-查看隐藏文件/文件夹：
+## 6.查看隐藏文件/文件夹：
 
 ```
 ls -a
 ```
 
-6. 查看内存
+## 7. 查看内存
 
 ```
 free -h
 ```
 
-7. 检查磁盘空间
+## 8. 检查磁盘空间
 
 ```
 df -h /
 ```
 
-8. 检查 Ubuntu 版本与内核
+## 9. 检查 Ubuntu 版本与内核
 
 ```
 lsb_release -a
 uname -r
 ```
 
-9. 安装下载的 .deb 包（示例）
+## 10. 安装下载的 .deb 包（示例）
 
 ```
 sudo apt install ./clash-verge_1.7.7_amd64.deb
 ```
 
-10. 解决 Terminator 未设为默认终端的问题
+## 11. 解决 Terminator 未设为默认终端的问题
 
 ```
 which terminator
@@ -103,13 +103,13 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emula
 sudo update-alternatives --config x-terminal-emulator
 ```
 
-11. VSCode配置
+## 12. VSCode配置
 
 下载以下的Extensions:
 
 
 
-12. Miniconda配置
+## 13. Miniconda配置
 
 ```
 sudo apt update
@@ -140,7 +140,7 @@ conda deactivate
 conda env remove -n ENV_NAME
 conda env list
 ```
-13. Docker配置
+## 14. Docker配置
 
 根据
 https://docs.docker.com/engine/install/ubuntu/
